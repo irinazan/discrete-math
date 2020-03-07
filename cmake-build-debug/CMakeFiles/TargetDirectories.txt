@@ -1,0 +1,2 @@
+C:/Projects/GitHub/discrete-math/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Projects/GitHub/discrete-math/cmake-build-debug/CMakeFiles/rebuild_cache.dir
