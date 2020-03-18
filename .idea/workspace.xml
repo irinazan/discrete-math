@@ -9,7 +9,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2362e658-1f7a-4b5b-a108-86716b65a0cd" name="Default Changelist" comment="" />
+    <list default="true" id="c13a2b2d-e551-4995-9e26-752f2635da29" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,13 +19,20 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1ZJXWcDlqA5cpux7SrAYx8GtCAP" />
+  <component name="ProjectId" id="1YoFASbvs34OpZtSseTnNWl7LSs" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -44,13 +51,35 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2362e658-1f7a-4b5b-a108-86716b65a0cd" name="Default Changelist" comment="" />
-      <created>1584558202960</created>
+      <changelist id="c13a2b2d-e551-4995-9e26-752f2635da29" name="Default Changelist" comment="" />
+      <created>1583600896747</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1584558202960</updated>
-      <workItem from="1584558204234" duration="550000" />
+      <updated>1583600896747</updated>
+      <workItem from="1583600898952" duration="1048000" />
     </task>
+    <task id="LOCAL-00001" summary="Initialized CMake project">
+      <created>1583600949191</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583600949191</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Initialized CMake project">
+      <created>1583601029656</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1583601029656</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Initialized CMake project">
+      <created>1583601176362</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1583601176362</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -66,5 +95,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initialized CMake project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initialized CMake project" />
   </component>
 </project>
