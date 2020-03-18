@@ -9,7 +9,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c13a2b2d-e551-4995-9e26-752f2635da29" name="Default Changelist" comment="" />
+    <list default="true" id="c13a2b2d-e551-4995-9e26-752f2635da29" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab1.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab2.md" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583601176362</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Initialized CMake project">
+      <created>1584561203083</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1584561203083</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
