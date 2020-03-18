@@ -9,9 +9,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c13a2b2d-e551-4995-9e26-752f2635da29" name="Default Changelist" comment="">
+    <list default="true" id="c13a2b2d-e551-4995-9e26-752f2635da29" name="Default Changelist" comment="Updated the algorithm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab1.md" beforeDir="false" afterPath="$PROJECT_DIR$/lab1.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,10 +28,16 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Pawel Jan" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1YoFASbvs34OpZtSseTnNWl7LSs" />
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
   </component>
@@ -69,7 +74,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583601176362</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated the algorithm">
+      <created>1584565956487</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1584565956487</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,6 +102,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initialized CMake project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialized CMake project" />
+    <MESSAGE value="Updated the algorithm" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the algorithm" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="918" y="118" key="CommitChangelistDialog2" timestamp="1584566142979">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="918" y="118" key="CommitChangelistDialog2/0.0.2560.1040@0.0.2560.1040" timestamp="1584566142979" />
+    <state x="872" y="256" key="Vcs.Push.Dialog.v2" timestamp="1584565984504">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="872" y="256" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1584565984504" />
+    <state x="988" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1584566114736">
+      <screen x="0" y="0" width="2560" height="1040" />
+    </state>
+    <state x="988" y="347" key="com.intellij.ide.util.TipDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1584566114736" />
   </component>
 </project>
