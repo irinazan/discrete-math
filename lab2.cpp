@@ -10,13 +10,13 @@ void assignment(vector<int>& a, vector<int>& b);
 
 void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists);
 
-int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool intersection_exists);
+int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists);
 
-void intersection (vector<int>& a, vector<int>& cash_a, bool intersection_exists);
+void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exists);
 
-void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool intersection_exists);
+void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersection_exists);
 
-void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool intersection_exists);
+void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists);
 
 int main() {
     vector<int> cash_a, cash_b, a, b;
@@ -56,7 +56,7 @@ void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<
     }
 }
 
-int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool intersection_exists) {
+int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists) {
     int menu_item;
     cout << "Enter a number to choose menu item" << "\n1 - Intersection" << "\n2 - Union" << "\n3 - Set difference"
          << "\n4 - Exit" << endl;
@@ -82,7 +82,7 @@ int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash
     }
 }
 
-void intersection (vector<int>& a, vector<int>& cash_a, bool intersection_exists) {
+void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exists) {
     if (intersection_exists) {
         vector<int> r;
         r = a;
@@ -107,7 +107,7 @@ void intersection (vector<int>& a, vector<int>& cash_a, bool intersection_exists
     }
 }
 
-void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool intersection_exists){
+void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersection_exists){
     vector<int> r, t;
     t = a;
     if (intersection_exists) {
@@ -129,7 +129,7 @@ void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool intersect
     }
 }
 
-void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool intersection_exists) {
+void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists) {
     vector<int> r;
     r = a;
     if (intersection_exists) {
