@@ -1,93 +1,106 @@
+
 #include <iostream>
 #include <vector>
 
-//TODO: translate all the text to the Russian language
+//TODO:
 
 using namespace std;
 
-void assignment(vector<int>& a, vector<int>& b);
+void assignment (vector<int>& a, vector<int>& b);
 
-void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists);
+void preprocess (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
 
-int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists);
+int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
 
-void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exists);
+void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exists);
 
-void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersection_exists);
+void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& intersection_exists);
 
-void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists);
+void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
+
+void symmetric_difference ();
+
+void cartesian_product (vector<int>& a, vector<int>& b);
 
 int main() {
+
+    setlocale(LC_ALL, "ru");
+
     vector<int> cash_a, cash_b, a, b;
     bool intersection_exists = false;
     assignment(a, b);
-    preprocessing (a, b, cash_a, cash_b, intersection_exists);
+    preprocess(a, b, cash_a, cash_b, intersection_exists);
     menu(a, b, cash_a, cash_b, intersection_exists);
 }
 
 void assignment (vector<int>& a, vector<int>& b) {
     int capacity, input;
-    cout << "Enter capacity of the set A:" << endl;
+    cout << "Введите мощность множества А:" << endl;
     cin >> capacity;
     while (capacity > 10) {
-        cout << "Capacity supposed to be in the range of numbers from 1 to 10\n" << "Please, re-enter capacity of the set A:" << endl;
+        cout << "Мощность представлена натуральными числами от 0 до 10.\n" << "Введите мощность множества А заново: " << endl;
         cin >> capacity;
     }
-    cout << "Enter elements of the set A:" << endl;
+    cout << "Введите элементы множества А:" << endl;
     for (int i = 0; i < capacity; ++i) {
         cin >> input;
         while (input > 30) {
-            cout << "Elements supposed to be in the range of numbers from 1 to 30\n" << "Please, re-enter element of the set A:" << endl;
+            cout << "Элементы множества принадлежат диапозону натуральных чисел от 1 до 30.\n" << "Введите элементы множества А заново: " << endl;
             cin >> input;
         }
         a.push_back(input);
     }
-    cout << "Enter capacity of the set B:" << endl;
+    cout << "Введите мощность множества В:" << endl;
     cin >> capacity;
     while (capacity > 10) {
-        cout << "Capacity supposed to be in the range of numbers from 1 to 10\n" << "Please, re-enter capacity of the set A:" << endl;
+        cout << "Мощность представлена натуральными числами от 0 до 10.\n" << "Введите мощность множества В заново: " << endl;
         cin >> capacity;
     }
     cout << "Enter elements of the set B:" << endl;
     for (int i = 0; i < capacity; ++i) {
         cin >> input;
         while (input > 30) {
-            cout << "Elements supposed to be in the range of numbers from 1 to 30\n" << "Please, re-enter element of the set A:" << endl;
+            cout << "Элементы множества принадлежат диапозону натуральных чисел от 1 до 30.\n" << "Введите элементы множества В заново: " << endl;
             cin >> input;
         }
         b.push_back(input);
     }
 }
 
-void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists) {
+void preprocess (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     for (int j = 0; j < a.size(); ++j) {
         for (int i = 0; i < b.size(); ++i) {
             if (a[j] == b[i]) {
-                cash_a.push_back(j);
-                cash_b.push_back(i);
+                cache_a.push_back(j);
+                cache_b.push_back(i);
                 intersection_exists = true;
             }
         }
     }
 }
 
-int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists) {
+int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     int menu_item;
-    cout << "Enter a number to choose menu item" << "\n1 - Intersection" << "\n2 - Union" << "\n3 - Set difference"
-         << "\n4 - Exit" << endl;
+    cout << "Введите номер операции:" << "\n1 - Пересечение" << "\n2 - Объединение" << "\n3 - Разность множеств"
+         << "\n4 - Декартово произведение" << "\n5 - Выход" << endl;
     while (true) {
         cin >> menu_item;
         switch (menu_item) {
             case 1: {
-                intersection(a, cash_a, intersection_exists);
+                intersection(a, cache_a, intersection_exists);
                 break;
             }
             case 2: {
-                _union(a, b, cash_a, intersection_exists);
+                _union(a, b, cache_a, intersection_exists);
                 break;
             }
             case 3: {
-                set_difference(a, b, cash_a, cash_b, intersection_exists);
+                set_difference(a, b, cache_a, cache_b, intersection_exists);
+                break;
+            }
+
+            case 4: {
+                cartesian_product(a, b);
                 break;
             }
             default: {
@@ -97,17 +110,17 @@ int menu (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash
     }
 }
 
-void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exists) {
+void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exists) {
     if (intersection_exists) {
         vector<int> r;
         r = a;
         for (int i = 0; i < r.size(); ++i) {
-            if (i == cash_a[i]) {
+            if (i == cache_a[i]) {
                 continue;
             }
             r.erase(r.begin() + i);
         }
-        cout << "Intersection of the sets: {";
+        cout << "Пересечение множеств: {";
         for (int i = 0; i < r.size(); ++i) {
             cout << r[i];
             if (i != r.size() - 1) {
@@ -118,20 +131,20 @@ void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exist
         }
     }
     else {
-        cout << "There are no similar numbers in sets" << endl;
+        cout << "Множества не имеют пересечения." << endl;
     }
 }
 
-void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersection_exists){
+void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& intersection_exists){
     vector<int> r;
     r = a;
     if (intersection_exists) {
-        for (int i : cash_a) {      //for (int i = 0; i < cash_a.size(); ++i)
+        for (int i : cache_a) {      //for (int i = 0; i < cash_a.size(); ++i)
             r.erase(r.begin() + i);
         }
     }
     r.insert(r.end(), b.begin(), b.end());
-    cout << "Union of the sets: {";
+    cout << "Объединение множеств: {";
     for (int i = 0; i < r.size(); ++i) {
         cout << r[i];
         if (i != r.size() - 1) {
@@ -143,18 +156,18 @@ void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersec
     }
 }
 
-void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists) {
+void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     vector<int> r;
     r = a;
     if (intersection_exists) {
-        for (int i : cash_a) {      //for (int i = 0; i < cash_a.size(); ++i)
+        for (int i : cache_a) {      //for (int i = 0; i < cash_a.size(); ++i)
             r.erase(r.begin() + i);
         }
     }
-    cout << "Set difference\n";
+    cout << "Разность множеств\n";
     cout << "A\\B:";
     if (r.empty()) {
-        cout << " empty set" << endl;
+        cout << " пустое множество" << endl;
     }
     else {
         cout << " {";
@@ -169,13 +182,13 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
     }
     r = b;
     if (intersection_exists) {
-        for (int i : cash_b) {      //for (int i = 0; i < cash_b.size(); ++i)
+        for (int i : cache_b) {      //for (int i = 0; i < cash_b.size(); ++i)
             r.erase(r.begin() + i);
         }
     }
     cout << "B\\A:";
     if (r.empty()) {
-        cout << " empty set" << endl;
+        cout << " пустое множество" << endl;
     }
     else {
         cout << " {";
@@ -186,6 +199,24 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
             } else {
                 cout << "}" << endl;
             }
+        }
+    }
+}
+
+void symmetric_difference ()
+{
+
+}
+
+void cartesian_product (vector<int>& a, vector<int>& b) // Декартово произведение
+{
+    for (int i = 0; i < a.size(); i++) {
+        for (int j = 0; j < b.size(); j++) {
+            if ( (i == a.size()-1) && (j == b.size() - 1)){
+                cout << "(" << a[i] << "," << b[j] << ")"; break;
+            }
+            cout << "(" << a[i] << "," << b[j] << "), ";
+
         }
     }
 }
