@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-//TODO:
+//TODO: Сделать всё до полуночи)))
 
 using namespace std;
 
@@ -17,7 +17,7 @@ void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& interse
 
 void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
 
-void symmetric_difference ();
+void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
 
 void cartesian_product (vector<int>& a, vector<int>& b);
 
@@ -55,7 +55,7 @@ void assignment (vector<int>& a, vector<int>& b) {
         cout << "Мощность представлена натуральными числами от 0 до 10.\n" << "Введите мощность множества В заново: " << endl;
         cin >> capacity;
     }
-    cout << "Enter elements of the set B:" << endl;
+    cout << "Введите элементы множества В:" << endl;
     for (int i = 0; i < capacity; ++i) {
         cin >> input;
         while (input > 30) {
@@ -81,7 +81,7 @@ void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector
 int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     int menu_item;
     cout << "Введите номер операции:" << "\n1 - Пересечение" << "\n2 - Объединение" << "\n3 - Разность множеств"
-         << "\n4 - Декартово произведение" << "\n5 - Выход" << endl;
+         << "\n4 - Декартово произведение" << "\n5 - Симметрическая разность" << "\n6 - Выход" << endl;
     while (true) {
         cin >> menu_item;
         switch (menu_item) {
@@ -102,6 +102,12 @@ int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cac
                 cartesian_product(a, b);
                 break;
             }
+
+            case 5: {
+                symmetric_difference(a, b, cache_a, cache_b, intersection_exists);
+                break;
+            }
+
             default: {
                 return 0;
             }
@@ -109,11 +115,11 @@ int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cac
     }
 }
 
-void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exists) {
+void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exists) {
     if (intersection_exists) {
         vector<int> r;
-        r.reserve(cash_a.size());   //preallocate memory
-        for (int i : cash_a) {  //for (int i = 0; i < cash_a.size(); ++i)
+        r.reserve(cache_a.size());   //preallocate memory
+        for (int i : cache_a) {  //for (int i = 0; i < cache_a.size(); ++i)
             r.push_back(a[i]);
         }
         cout << "Пересечение множеств: {";
@@ -131,12 +137,12 @@ void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exist
     }
 }
 
-void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersection_exists) {
+void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& intersection_exists) {
     vector<int> r;
     r = a;
     if (intersection_exists) {
-        for (int i = cash_a.size(); i > 0; --i) {   //for (int i = 0; i < cash_a.size(); ++i)
-            r.erase(r.begin() + (cash_a[i-1]));
+        for (int i = cache_a.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
+            r.erase(r.begin() + (cache_a[i - 1]));
         }
     }
     r.insert(r.end(), b.begin(), b.end());
@@ -152,12 +158,12 @@ void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersec
     }
 }
 
-void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists) {
+void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     vector<int> r;
     r = a;
     if (intersection_exists) {
-        for (int i = cash_a.size(); i > 0; --i) {   //for (int i = 0; i < cash_a.size(); ++i)
-            r.erase(r.begin() + (cash_a[i-1]));
+        for (int i = cache_a.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
+            r.erase(r.begin() + (cache_a[i - 1]));
         }
     }
     cout << "Разность множеств\n";
@@ -178,8 +184,8 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
     }
     r = b;
     if (intersection_exists) {
-        for (int i = cash_b.size(); i > 0; --i) {   //for (int i = 0; i < cash_a.size(); ++i)
-            r.erase(r.begin() + (cash_b[i-1]));
+        for (int i = cache_b.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
+            r.erase(r.begin() + (cache_b[i - 1]));
         }
     }
     cout << "B\\A:";
@@ -199,9 +205,39 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
     }
 }
 
-void symmetric_difference ()
+void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists)
 {
+    vector<int> ra;
+    ra = a;
+    if (intersection_exists) {
+        for (int i = cache_a.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
+            ra.erase(ra.begin() + (cache_a[i - 1]));
+        }
+    }
+    vector<int> rb;
+    rb = b;
 
+    if (intersection_exists) {
+        for (int i = cache_b.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
+            rb.erase(rb.begin() + (cache_b[i - 1]));
+        }
+    }
+
+    cout << "Симметрическая разность: {";
+    for (int i = 0; i < ra.size(); ++i) {
+        cout << ra[i];
+        cout << ",";
+    }
+
+    for (int i = 0; i < rb.size(); ++i) {
+        cout << rb[i];
+        if (i != rb.size() - 1) {
+            cout << ",";
+        }
+        else {
+            cout << "}" << endl;
+        }
+    }
 }
 
 void cartesian_product (vector<int>& a, vector<int>& b) // Декартово произведение
