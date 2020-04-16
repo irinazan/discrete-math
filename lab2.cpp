@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 
@@ -8,7 +7,7 @@ using namespace std;
 
 void assignment (vector<int>& a, vector<int>& b);
 
-void preprocess (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);    //TODO:ответь в телеграме
+void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
 
 int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
 
@@ -29,7 +28,7 @@ int main() {
     vector<int> cash_a, cash_b, a, b;
     bool intersection_exists = false;
     assignment(a, b);
-    preprocess(a, b, cash_a, cash_b, intersection_exists);
+    preprocessing(a, b, cash_a, cash_b, intersection_exists);
     menu(a, b, cash_a, cash_b, intersection_exists);
 }
 
@@ -67,7 +66,7 @@ void assignment (vector<int>& a, vector<int>& b) {
     }
 }
 
-void preprocess (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
+void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     for (int j = 0; j < a.size(); ++j) {
         for (int i = 0; i < b.size(); ++i) {
             if (a[j] == b[i]) {
@@ -207,13 +206,19 @@ void symmetric_difference ()
 
 void cartesian_product (vector<int>& a, vector<int>& b) // Декартово произведение
 {
-    for (int i = 0; i < a.size(); i++) {
-        for (int j = 0; j < b.size(); j++) {
-            if ( (i == a.size()-1) && (j == b.size() - 1)){
-                cout << "(" << a[i] << "," << b[j] << ")"; break;
-            }
-            cout << "(" << a[i] << "," << b[j] << "), ";    //TODO:поменяй здесь обычные скобки на фигурные
+    vector<vector<vector<int>>> r(a.size(), vector<vector<int>>(b.size(), vector<int> (2)));
 
+    for (int i = 0; i < a.size(); ++i) {
+        for (int j = 0; j < b.size(); ++j) {
+            r[i][j][0] = a[j];
+            r[i][j][1] = b[i];
         }
+    }
+    //TODO: добавьте здесь сообщение о том, что это декартово произведение
+    for (int i = 0; i < a.size(); ++i) {
+        for (int j = 0; j < b.size(); ++j) {
+            cout << "{" << r[i][j][0] << "," << r[i][j][1] << "}" << " ";
+        }
+        cout << endl;
     }
 }
