@@ -189,4 +189,3 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
         }
     }
 }
-#pragma clang diagnostic pop
