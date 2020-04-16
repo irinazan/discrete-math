@@ -67,9 +67,9 @@ void assignment (vector<int>& a, vector<int>& b) {
     }
 } 
 
-void preprocess (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
-    for (int j = 0; j < a.size(); ++j) {
-        for (int i = 0; i < b.size(); ++i) {
+void preprocess (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) { //функция предпросчета
+    for (int j = 0; j < a.size(); ++j) { //Выбрать 1, 2,...,р1 элемент множества А
+        for (int i = 0; i < b.size(); ++i) { //Выбрать 1, 2,...,р2 элемент множества B
             if (a[j] == b[i]) {
                 cache_a.push_back(j); //Вставка элементов множества А в кэш-вектор с конца
                 cache_b.push_back(i); //Вставка элементов множества В в кэш-вектор с конца
@@ -114,11 +114,11 @@ void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exis
     if (intersection_exists) {
         vector<int> r;
         r = a;
-        for (int i = 0; i < r.size(); ++i) {
-            if (i == cache_a[i]) {
+        for (int i = 0; i < r.size(); ++i) { //Выбрать 1, 2, ..., р1 элемент А
+            if (i == cache_a[i]) { //Если элементы совпали, продолжить
                 continue;
             }
-            r.erase(r.begin() + i);
+            r.erase(r.begin() + i); //Удалить несоответствующие элементы из вектора
         }
         cout << "Пересечение множеств: {"; //Вывести результат выполненной операции на экран
         for (int i = 0; i < r.size(); ++i) {
@@ -160,13 +160,13 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vecto
     vector<int> r;
     r = a;
     if (intersection_exists) {
-        for (int i : cache_a) {      //for (int i = 0; i < cash_a.size(); ++i)
-            r.erase(r.begin() + i);
+        for (int i : cache_a) {      //for (int i = 0; i < cash_a.size(); ++i) //??
+            r.erase(r.begin() + i); //Удалить несоответствующие элементы из вектора
         }
     }
     cout << "Разность множеств\n"; //Вывести результат выполненной операции на экран
     cout << "A\\B:";
-    if (r.empty()) {
+    if (r.empty()) {  //Случай для пустого множества
         cout << " пустое множество" << endl;
     }
     else {
@@ -181,12 +181,12 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vecto
         }
     }
     r = b;
-    if (intersection_exists) {
+    if (intersection_exists) { //Случай для существующего пересечения
         for (int i : cache_b) {      //for (int i = 0; i < cash_b.size(); ++i)
-            r.erase(r.begin() + i);
+            r.erase(r.begin() + i); //Удалить несоответствующие элементы из вектора
         }
     }
-    cout << "B\\A:";
+    cout << "B\\A:"; //Вывести результат выполненной операции на экран
     if (r.empty()) {
         cout << " пустое множество" << endl;
     }
@@ -210,8 +210,8 @@ void symmetric_difference ()
 
 void cartesian_product (vector<int>& a, vector<int>& b) // Декартово произведение
 {
-    for (int i = 0; i < a.size(); i++) {
-        for (int j = 0; j < b.size(); j++) {
+    for (int i = 0; i < a.size(); i++) { //Выбрать 1, 2,...,р1 элемент множества А
+        for (int j = 0; j < b.size(); j++) { //Выбрать 1, 2,...,р2 элемент множества В
             if ( (i == a.size()-1) && (j == b.size() - 1)){
                 cout << "(" << a[i] << "," << b[j] << ")"; break;
             }
