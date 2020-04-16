@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
 
-//TODO: Сделать всё до полуночи)))
+//TODO: Сделать всё до полуночи
 
 using namespace std;
 
-void assignment (vector<int>& a, vector<int>& b);
+int assignment (vector<int>& a, vector<int>& b);
 
 void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists);
 
@@ -32,37 +32,104 @@ int main() {
     menu(a, b, cash_a, cash_b, intersection_exists);
 }
 
-void assignment (vector<int>& a, vector<int>& b) {
+int assignment (vector<int>& a, vector<int>& b) {
+
+    int assignment_method;
+
     int capacity, input;
-    cout << "Введите мощность множества А:" << endl;
-    cin >> capacity; //Принять от пользователя мощность первого множества
-    while (capacity > 10) {
-        cout << "Мощность представлена натуральными числами от 0 до 10.\n" << "Введите мощность множества А заново: " << endl;
-        cin >> capacity; //В случае несоответствия, принять новую мощность множества
-    }
-    cout << "Введите элементы множества А:" << endl;
-    for (int i = 0; i < capacity; ++i) { //Если 1 ⩽ i ⩽ 30, то i становится элементом множества А
-        cin >> input; //Принять от пользователя элементы множества, количество которых соответствует мощности множества
-        while (input > 30) {
-            cout << "Элементы множества принадлежат диапозону натуральных чисел от 1 до 30.\n" << "Введите элементы множества А заново: " << endl;
-            cin >> input; //В случае несоответсятвия элемента диапазону, принять новые элементы
+
+    while (true) {
+
+        cout << "1 - Задание методом перечисления" << endl;
+        cout << "2 - Задание через высказывание" << endl;
+        cin >> assignment_method;
+        switch (assignment_method) {
+            case 1: {
+                cout << "Введите мощность множества А:" << endl;
+                cin >> capacity; //Принять от пользователя мощность первого множества
+                while (capacity > 10) {
+                    cout << "Мощность представлена натуральными числами от 0 до 10.\n"
+                         << "Введите мощность множества А заново: " << endl;
+                    cin >> capacity; //В случае несоответствия, принять новую мощность множества
+                }
+                cout << "Введите элементы множества А:" << endl;
+                for (int i = 0; i < capacity; ++i) {
+                    cin >> input; //Принять от пользователя элементы множества, количество которых соответствует мощности множества
+                    while (input > 30) {
+                        cout << "Элементы множества принадлежат диапозону натуральных чисел от 1 до 30.\n"
+                             << "Введите элементы множества А заново: " << endl;
+                        cin >> input; //В случае несоответсятвия элемента диапазону, принять новые элементы
+                    }
+                    a.push_back(input); //Функция вставки элементов в вектор с конца
+                }
+                cout << "Введите мощность множества В:" << endl; //Операции, аналогичные проведенным с множеством А
+                cin >> capacity;
+                while (capacity > 10) {
+                    cout << "Мощность представлена натуральными числами от 0 до 10.\n"
+                         << "Введите мощность множества В заново: " << endl;
+                    cin >> capacity;
+                }
+                cout << "Введите элементы множества В:" << endl;
+                for (int i = 0; i < capacity; ++i) {
+                    cin >> input;
+                    while (input > 30) {
+                        cout << "Элементы множества принадлежат диапозону натуральных чисел от 1 до 30.\n"
+                             << "Введите элементы множества В заново: " << endl;
+                        cin >> input;
+                    }
+                    b.push_back(input);
+                }
+            }
+            case 2: {
+
+                int capacityA = 0, capacityB = 0;
+                int ai, bj;
+
+                cout << "Введите мощность множества А:" << endl;
+                cin >> capacityA;
+
+                cout << "Введите мощность множества B:" << endl;
+                cin >> capacityB;
+
+                for (int i = 0; i < capacityA; ++i) {
+                     ai = i*2 + 2;
+                    if (ai >= 1 && ai <= 30) {
+                        a.push_back(ai);
+                    }
+                }
+                cout << "Множество А: {";
+                for (int i = 0; i < capacityA; ++i) {
+                    cout << a[i];
+                    if (i != a.size() - 1) {
+                        cout << ",";
+                    }
+                    else {
+                        cout << "}" << endl;
+                    }
+                }
+
+                for (int j = 0; j <= capacityB; ++j) {
+                    bj = j*2 - 1;
+                    if (bj >= 1 && bj <= 30) {
+                        b.push_back(bj);
+                    }
+                }
+                cout << "Множество В: {";
+                for (int j = 0; j < capacityB; ++j) {
+                    cout << b[j];
+                    if (j != b.size() - 1) {
+                        cout << ",";
+                    }
+                    else {
+                        cout << "}" << endl;
+                    }
+                }
+
+            }
+
+            default:
+                return 0;
         }
-        a.push_back(input); //Функция вставки элементов в вектор с конца
-    }
-    cout << "Введите мощность множества В:" << endl; //Операции, аналогичные проведенным с множеством А
-    cin >> capacity;
-    while (capacity > 10) {
-        cout << "Мощность представлена натуральными числами от 0 до 10.\n" << "Введите мощность множества В заново: " << endl;
-        cin >> capacity;
-    }
-    cout << "Введите элементы множества В:" << endl;
-    for (int i = 0; i < capacity; ++i) {
-        cin >> input;
-        while (input > 30) {
-            cout << "Элементы множества принадлежат диапозону натуральных чисел от 1 до 30.\n" << "Введите элементы множества В заново: " << endl;
-            cin >> input;
-        }
-        b.push_back(input);
     }
 }
 
@@ -115,10 +182,10 @@ int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cac
     }
 }
 
-void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exists) { //функция пересечения
+void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exists) {
     if (intersection_exists) {
         vector<int> r; //Создать пустое множество r
-        r.reserve(cache_a.size());   
+        r.reserve(cache_a.size());
         for (int i : cache_a) {  //for (int i = 0; i < cache_a.size(); ++i)
             r.push_back(a[i]); //Копировать элементы множества A во множество r
         }
@@ -141,7 +208,7 @@ void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& interse
     vector<int> r; //Создать пустое множество r
     r = a; //Копировать элементы множества A во множество r
     if (intersection_exists) {
-        for (int i = cache_a.size(); i > 0; --i) {   
+        for (int i = cache_a.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
             r.erase(r.begin() + (cache_a[i - 1])); //Удалить несоответствующие элементы из вектора
         }
     }
@@ -158,7 +225,7 @@ void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& interse
     }
 }
 
-void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) { //функция разности множеств
+void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     vector<int> r; //Создать пустое множество r
     r = a; //Копировать элементы множества A в множество r
     if (intersection_exists) {
@@ -205,8 +272,8 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vecto
     }
 }
 
-void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) //Cимметрическая разность множеств
-{
+void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists)
+{ //Cимметрическая разность множеств
     vector<int> ra; //Cоздаём пустoe множествo
     ra = a; //Копируем элементы множества A в множество r
     if (intersection_exists) {
@@ -242,11 +309,11 @@ void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a,
 
 void cartesian_product (vector<int>& a, vector<int>& b) // Декартово произведение
 {
-    vector<vector<vector<int>>> r(a.size(), vector<vector<int>>(b.size(), vector<int> (2))); //Создаём пустое множество r
+    vector<vector<vector<int>>> r(a.size(), vector<vector<int>>(b.size(), vector<int> (2)));
 
     for (int i = 0; i < a.size(); ++i) {
         for (int j = 0; j < b.size(); ++j) {
-            r[i][j][0] = a[j]; //Копируем i-ый элемент множества A 
+            r[i][j][0] = a[j]; //Копируем i-ый элемент множества A
             r[i][j][1] = b[i]; //и j-ый элемент множества B в подмножество множества r
         }
     }
