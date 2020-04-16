@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 
-//TODO: Сделать всё до полуночи
 
 using namespace std;
 
@@ -86,18 +85,18 @@ int assignment (vector<int>& a, vector<int>& b) {
                 int ai, bj;
 
                 cout << "Введите мощность множества А:" << endl;
-                cin >> capacityA;
+                cin >> capacityA; //Принять от пользователя мощность первого множества
 
                 cout << "Введите мощность множества B:" << endl;
-                cin >> capacityB;
+                cin >> capacityB; //Принять от пользователя мощность второго множества
 
-                for (int i = 0; i < capacityA; ++i) {
+                for (int i = 0; i < capacityA; ++i) { //Если 1 ⩽ i ⩽ 30, то i становится элементом множества А
                      ai = i*2 + 2;
                     if (ai >= 1 && ai <= 30) {
-                        a.push_back(ai);
+                        a.push_back(ai); //Функция вставки элементов в вектор с конца
                     }
                 }
-                cout << "Множество А: {";
+                cout << "Множество А: {"; //Вывод множества А на экран
                 for (int i = 0; i < capacityA; ++i) {
                     cout << a[i];
                     if (i != a.size() - 1) {
@@ -108,13 +107,13 @@ int assignment (vector<int>& a, vector<int>& b) {
                     }
                 }
 
-                for (int j = 0; j <= capacityB; ++j) {
+                for (int j = 0; j <= capacityB; ++j) { //Если 1 ⩽ j ⩽ 30, то j становится элементом множества B
                     bj = j*2 - 1;
                     if (bj >= 1 && bj <= 30) {
-                        b.push_back(bj);
+                        b.push_back(bj); //Функция вставки элементов в вектор с конца
                     }
                 }
-                cout << "Множество В: {";
+                cout << "Множество В: {"; //Вывод множества А на экран
                 for (int j = 0; j < capacityB; ++j) {
                     cout << b[j];
                     if (j != b.size() - 1) {
