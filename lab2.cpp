@@ -2,7 +2,6 @@
 #include <vector>
 
 //TODO: translate all the text to the Russian language
-//TODO: check if numbers are in the range from 1 to 100
 
 using namespace std;
 
@@ -30,23 +29,39 @@ void assignment (vector<int>& a, vector<int>& b) {
     int capacity, input;
     cout << "Enter capacity of the set A:" << endl;
     cin >> capacity;
+    while (capacity > 10) {
+        cout << "Capacity supposed to be in the range of numbers from 1 to 10\n" << "Please, re-enter capacity of the set A:" << endl;
+        cin >> capacity;
+    }
     cout << "Enter elements of the set A:" << endl;
     for (int i = 0; i < capacity; ++i) {
         cin >> input;
+        while (input > 30) {
+            cout << "Elements supposed to be in the range of numbers from 1 to 30\n" << "Please, re-enter element of the set A:" << endl;
+            cin >> input;
+        }
         a.push_back(input);
     }
     cout << "Enter capacity of the set B:" << endl;
     cin >> capacity;
+    while (capacity > 10) {
+        cout << "Capacity supposed to be in the range of numbers from 1 to 10\n" << "Please, re-enter capacity of the set A:" << endl;
+        cin >> capacity;
+    }
     cout << "Enter elements of the set B:" << endl;
     for (int i = 0; i < capacity; ++i) {
         cin >> input;
+        while (input > 30) {
+            cout << "Elements supposed to be in the range of numbers from 1 to 30\n" << "Please, re-enter element of the set A:" << endl;
+            cin >> input;
+        }
         b.push_back(input);
     }
 }
 
 void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector<int>& cash_b, bool& intersection_exists) {
-    for (int j = 0; j < size(a); ++j) {
-        for (int i = 0; i < size(b); ++i) {
+    for (int j = 0; j < a.size(); ++j) {
+        for (int i = 0; i < b.size(); ++i) {
             if (a[j] == b[i]) {
                 cash_a.push_back(j);
                 cash_b.push_back(i);
@@ -86,16 +101,16 @@ void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exist
     if (intersection_exists) {
         vector<int> r;
         r = a;
-        for (int i = 0; i < size(r); ++i) {
+        for (int i = 0; i < r.size(); ++i) {
             if (i == cash_a[i]) {
                 continue;
             }
             r.erase(r.begin() + i);
         }
         cout << "Intersection of the sets: {";
-        for (int i = 0; i < size(r); ++i) {
+        for (int i = 0; i < r.size(); ++i) {
             cout << r[i];
-            if (i != size(r) - 1) {
+            if (i != r.size() - 1) {
                 cout << "," << " ";
             } else {
                 cout << "}" << endl;
@@ -108,19 +123,18 @@ void intersection (vector<int>& a, vector<int>& cash_a, bool& intersection_exist
 }
 
 void _union (vector<int>& a, vector<int>& b, vector<int>& cash_a, bool& intersection_exists){
-    vector<int> r, t;
-    t = a;
+    vector<int> r;
+    r = a;
     if (intersection_exists) {
-        for (int i = 0; i < size(cash_a); ++i) {
-            t.erase(t.begin() + cash_a[i]);
+        for (int i : cash_a) {      //for (int i = 0; i < cash_a.size(); ++i)
+            r.erase(r.begin() + i);
         }
     }
-    r = t;
     r.insert(r.end(), b.begin(), b.end());
     cout << "Union of the sets: {";
-    for (int i = 0; i < size(r); ++i) {
+    for (int i = 0; i < r.size(); ++i) {
         cout << r[i];
-        if (i != size(r) - 1) {
+        if (i != r.size() - 1) {
             cout << ",";
         }
         else {
@@ -133,8 +147,8 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
     vector<int> r;
     r = a;
     if (intersection_exists) {
-        for (int i = 0; i < size(cash_a); ++i) {
-            r.erase(r.begin() + cash_a[i]);
+        for (int i : cash_a) {      //for (int i = 0; i < cash_a.size(); ++i)
+            r.erase(r.begin() + i);
         }
     }
     cout << "Set difference\n";
@@ -144,9 +158,9 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
     }
     else {
         cout << " {";
-        for (int i = 0; i < size(r); ++i) {
+        for (int i = 0; i < r.size(); ++i) {
             cout << r[i];
-            if (i != size(r) - 1) {
+            if (i != r.size() - 1) {
                 cout << ",";
             } else {
                 cout << "}" << endl;
@@ -155,8 +169,8 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
     }
     r = b;
     if (intersection_exists) {
-        for (int i = 0; i < size(cash_b); ++i) {
-            r.erase(r.begin() + cash_b[i]);
+        for (int i : cash_b) {      //for (int i = 0; i < cash_b.size(); ++i)
+            r.erase(r.begin() + i);
         }
     }
     cout << "B\\A:";
@@ -165,9 +179,9 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
     }
     else {
         cout << " {";
-        for (int i = 0; i < size(r); ++i) {
+        for (int i = 0; i < r.size(); ++i) {
             cout << r[i];
-            if (i != size(r) - 1) {
+            if (i != r.size() - 1) {
                 cout << ",";
             } else {
                 cout << "}" << endl;
@@ -175,3 +189,4 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cash_a, vector
         }
     }
 }
+#pragma clang diagnostic pop
