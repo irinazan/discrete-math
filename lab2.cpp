@@ -35,21 +35,21 @@ int main() {
 void assignment (vector<int>& a, vector<int>& b) {
     int capacity, input;
     cout << "Введите мощность множества А:" << endl;
-    cin >> capacity;
+    cin >> capacity; //Принять от пользователя мощность первого множества
     while (capacity > 10) {
         cout << "Мощность представлена натуральными числами от 0 до 10.\n" << "Введите мощность множества А заново: " << endl;
-        cin >> capacity;
+        cin >> capacity; //В случае несоответствия, принять новую мощность множества
     }
     cout << "Введите элементы множества А:" << endl;
-    for (int i = 0; i < capacity; ++i) {
-        cin >> input;
+    for (int i = 0; i < capacity; ++i) { //Если 1 ⩽ i ⩽ 30, то i становится элементом множества А
+        cin >> input; //Принять от пользователя элементы множества, количество которых соответствует мощности множества
         while (input > 30) {
             cout << "Элементы множества принадлежат диапозону натуральных чисел от 1 до 30.\n" << "Введите элементы множества А заново: " << endl;
-            cin >> input;
+            cin >> input; //В случае несоответсятвия элемента диапазону, принять новые элементы
         }
-        a.push_back(input);
+        a.push_back(input); //Функция вставки элементов в вектор с конца
     }
-    cout << "Введите мощность множества В:" << endl;
+    cout << "Введите мощность множества В:" << endl; //Операции, аналогичные проведенным с множеством А
     cin >> capacity;
     while (capacity > 10) {
         cout << "Мощность представлена натуральными числами от 0 до 10.\n" << "Введите мощность множества В заново: " << endl;
@@ -69,9 +69,9 @@ void assignment (vector<int>& a, vector<int>& b) {
 void preprocessing (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
     for (int j = 0; j < a.size(); ++j) {
         for (int i = 0; i < b.size(); ++i) {
-            if (a[j] == b[i]) {
-                cache_a.push_back(j);
-                cache_b.push_back(i);
+            if (a[j] == b[i]) { //Если j-ый элемент множества A равен i-тому элементу множества B
+                cache_a.push_back(j); //Запись значения j элементов множества А в кэш-вектор с конца
+                cache_b.push_back(i); //Запись значения i элементов множества В в кэш-вектор с конца
                 intersection_exists = true;
             }
         }
@@ -83,7 +83,7 @@ int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cac
     cout << "Введите номер операции:" << "\n1 - Пересечение" << "\n2 - Объединение" << "\n3 - Разность множеств"
          << "\n4 - Декартово произведение" << "\n5 - Симметрическая разность" << "\n6 - Выход" << endl;
     while (true) {
-        cin >> menu_item;
+        cin >> menu_item; //Принять номер операции, выбранный пользователем
         switch (menu_item) {
             case 1: {
                 intersection(a, cache_a, intersection_exists);
@@ -115,14 +115,14 @@ int menu (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cac
     }
 }
 
-void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exists) {
+void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exists) { //функция пересечения
     if (intersection_exists) {
-        vector<int> r;
-        r.reserve(cache_a.size());   //preallocate memory
+        vector<int> r; //Создать пустое множество r
+        r.reserve(cache_a.size());   
         for (int i : cache_a) {  //for (int i = 0; i < cache_a.size(); ++i)
-            r.push_back(a[i]);
+            r.push_back(a[i]); //Копировать элементы множества A во множество r
         }
-        cout << "Пересечение множеств: {";
+        cout << "Пересечение множеств: {"; //Вывести результат выполненной операции на экран
         for (int i = 0; i < r.size(); ++i) {
             cout << r[i];
             if (i != r.size() - 1) {
@@ -137,16 +137,16 @@ void intersection (vector<int>& a, vector<int>& cache_a, bool& intersection_exis
     }
 }
 
-void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& intersection_exists) {
-    vector<int> r;
-    r = a;
+void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& intersection_exists) { //функция объединения
+    vector<int> r; //Создать пустое множество r
+    r = a; //Копировать элементы множества A во множество r
     if (intersection_exists) {
-        for (int i = cache_a.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
-            r.erase(r.begin() + (cache_a[i - 1]));
+        for (int i = cache_a.size(); i > 0; --i) {   
+            r.erase(r.begin() + (cache_a[i - 1])); //Удалить несоответствующие элементы из вектора
         }
     }
-    r.insert(r.end(), b.begin(), b.end());
-    cout << "Объединение множеств: {";
+    r.insert(r.end(), b.begin(), b.end()); //Копировать элементы множества B во множество r
+    cout << "Объединение множеств: {"; //Вывести результат выполненной операции на экран
     for (int i = 0; i < r.size(); ++i) {
         cout << r[i];
         if (i != r.size() - 1) {
@@ -158,15 +158,15 @@ void _union (vector<int>& a, vector<int>& b, vector<int>& cache_a, bool& interse
     }
 }
 
-void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) {
-    vector<int> r;
-    r = a;
+void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) { //функция разности множеств
+    vector<int> r; //Создать пустое множество r
+    r = a; //Копировать элементы множества A в множество r
     if (intersection_exists) {
         for (int i = cache_a.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
-            r.erase(r.begin() + (cache_a[i - 1]));
+            r.erase(r.begin() + (cache_a[i - 1])); //Во множестве r удаляем элементы с позициями, равными значению элементов множества A
         }
     }
-    cout << "Разность множеств\n";
+    cout << "Разность множеств\n"; //Вывести результат выполненной операции на экран
     cout << "A\\B:";
     if (r.empty()) {
         cout << " пустое множество" << endl;
@@ -182,17 +182,17 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vecto
             }
         }
     }
-    r = b;
+    r = b; //Перезаписать элементы множества B во множество r
     if (intersection_exists) {
         for (int i = cache_b.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
-            r.erase(r.begin() + (cache_b[i - 1]));
+            r.erase(r.begin() + (cache_b[i - 1])); //Во множестве r удаляем элементы с позициями, равными значению элементов множества B
         }
     }
     cout << "B\\A:";
     if (r.empty()) {
         cout << " пустое множество" << endl;
     }
-    else {
+    else { //Вывести результат выполненной операции на экран
         cout << " {";
         for (int i = 0; i < r.size(); ++i) {
             cout << r[i];
@@ -205,17 +205,17 @@ void set_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vecto
     }
 }
 
-void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists)
+void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a, vector<int>& cache_b, bool& intersection_exists) //Cимметрическая разность множеств
 {
-    vector<int> ra;
-    ra = a;
+    vector<int> ra; //Cоздаём пустoe множествo
+    ra = a; //Копируем элементы множества A в множество r
     if (intersection_exists) {
         for (int i = cache_a.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
             ra.erase(ra.begin() + (cache_a[i - 1]));
         }
     }
-    vector<int> rb;
-    rb = b;
+    vector<int> rb; //Cоздаём пустoe множествo
+    rb = b; //Копируем элементы множества A в множество r
 
     if (intersection_exists) {
         for (int i = cache_b.size(); i > 0; --i) {   //for (int i = 0; i < cache_a.size(); ++i)
@@ -223,7 +223,7 @@ void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a,
         }
     }
 
-    cout << "Симметрическая разность: {";
+    cout << "Симметрическая разность: {"; //Вывести результат выполненной операции на экран
     for (int i = 0; i < ra.size(); ++i) {
         cout << ra[i];
         cout << ",";
@@ -242,15 +242,15 @@ void symmetric_difference (vector<int>& a, vector<int>& b, vector<int>& cache_a,
 
 void cartesian_product (vector<int>& a, vector<int>& b) // Декартово произведение
 {
-    vector<vector<vector<int>>> r(a.size(), vector<vector<int>>(b.size(), vector<int> (2)));
+    vector<vector<vector<int>>> r(a.size(), vector<vector<int>>(b.size(), vector<int> (2))); //Создаём пустое множество r
 
     for (int i = 0; i < a.size(); ++i) {
         for (int j = 0; j < b.size(); ++j) {
-            r[i][j][0] = a[j];
-            r[i][j][1] = b[i];
+            r[i][j][0] = a[j]; //Копируем i-ый элемент множества A 
+            r[i][j][1] = b[i]; //и j-ый элемент множества B в подмножество множества r
         }
     }
-    //TODO: добавьте здесь сообщение о том, что это декартово произведение
+    //Вывести на экран результат выполнения операции прямого произведения
     for (int i = 0; i < a.size(); ++i) {
         for (int j = 0; j < b.size(); ++j) {
             cout << "{" << r[i][j][0] << "," << r[i][j][1] << "}" << " ";
